@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mcapitanio/impala-kudu:2.7.0-cdh5.9.0
+    image: mcapitanio/impala-kudu:1.1.0
     privileged: true
     external_links:
     - hive
