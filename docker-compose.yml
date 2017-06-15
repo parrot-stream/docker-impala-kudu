@@ -1,0 +1,52 @@
+version: '3'
+services:
+  impala-kudu-master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mcapitanio/impala-kudu:2.7.0-cdh5.9.0
+    privileged: true
+    external_links:
+    - hive
+    networks:
+      hadoop:
+        aliases:
+        - kudu
+    ports:
+    - 7051:7051
+    - 8051:8051
+    - 25010:25010
+    - 25020:25020
+    environment:
+      IMPALA_STATE_STORE: "true"
+      KUDU_MASTER: "true"
+      IMPALA_STATE_STORE_HOST: "impala"
+      KUDU_MASTER_HOSTS: "kudu"
+  impala-kudu-tserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mcapitanio/impala-kudu:2.7.0-cdh5.9.0
+    privileged: true
+    external_links:
+    - hive
+    networks:
+      hadoop:
+        aliases:
+        - impala
+    ports:
+    - 7050:7050
+    - 8050:8050
+    - 21000:21000
+    - 21050:21050
+    - 25000:25000
+    environment:
+      IMPALA_STATE_STORE: "false"
+      KUDU_MASTER: "false"
+      KUDU_MASTER_HOSTS: "kudu"
+networks:
+  default:
+    external:
+      name: hadoop
+  hadoop:
+    driver: bridge
