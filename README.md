@@ -15,12 +15,7 @@ You can pull it with:
 
 You can also find other images based on different Apache HBase releases, using a different tag in the following form:
 
-    docker pull mcapitanio/impala-kudu:[kudu-release]
-
-
-For example, if you want Impala with Kudu release 1.0.0 you can pull the image with:
-
-    docker pull mcapitanio/impala-kudu:1.0.0
+    docker pull mcapitanio/impala-kudu:[impala-kudu-release]
 
 Run with Docker Compose:
 
@@ -42,5 +37,4 @@ Once started you'll be able to access to the following UIs:
 
 ### Available tags:
 
-- Impala 2.7.0 & Kudu 1.1.0 ([1.1.0](https://github.com/mcapitanio/docker-impala-kudu/blob/1.1.0/Dockerfile), [latest](https://github.com/mcapitanio/docker-impala-kudu/blob/latest/Dockerfile))
-- Impala 2.7.0 & Kudu 1.0.0 ([1.0.0](https://github.com/mcapitanio/docker-impala-kudu/blob/1.0.0/Dockerfile))
+- Impala 2.7.0 & Kudu 1.1.0 ([2.7.0-cdh5.9.0](https://github.com/mcapitanio/docker-impala-kudu/blob/2.7.0-cdh5.9.0/Dockerfile), [latest](https://github.com/mcapitanio/docker-impala-kudu/blob/latest/Dockerfile))
