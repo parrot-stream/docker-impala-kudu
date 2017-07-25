@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./wait-for-it.sh zookeeper:2181 -t 120
+/wait-for-it.sh zookeeper:2181 -t 120
 rc=$?
 if [ $rc -ne 0 ]; then
     echo -e "\n--------------------------------------------"
@@ -9,13 +9,13 @@ if [ $rc -ne 0 ]; then
     exit $rc
 fi
 
-/opt/docker/start-kudu.sh
+/start-kudu.sh
 
 
 ########################################
 #	IMPALA
 ########################################
-./wait-for-it.sh hive:10002 -t 120
+/wait-for-it.sh hive:10002 -t 120
 rc=$?
 if [ $rc -ne 0 ]; then
     echo -e "\n---------------------------------------"
@@ -24,4 +24,4 @@ if [ $rc -ne 0 ]; then
     exit $rc
 fi
 
-/opt/docker/start-impala.sh
+/start-impala.sh

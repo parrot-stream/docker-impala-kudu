@@ -1,52 +1,21 @@
 version: '3'
 services:
-  impala-kudu-master:
+  impala:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mcapitanio/impala-kudu:latest
-    privileged: true
-    external_links:
-    - hive
+    image: parrotstream/impala-kudu:latest
     networks:
-      hadoop:
-        aliases:
-        - kudu
+    - parrot
     ports:
-    - 7051:7051
-    - 8051:8051
-    - 25010:25010
-    - 25020:25020
-    environment:
-      IMPALA_STATE_STORE: "true"
-      KUDU_MASTER: "true"
-      IMPALA_STATE_STORE_HOST: "impala"
-      KUDU_MASTER_HOSTS: "kudu"
-  impala-kudu-tserver:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: mcapitanio/impala-kudu:latest
-    privileged: true
-    external_links:
-    - hive
-    networks:
-      hadoop:
-        aliases:
-        - impala
-    ports:
-    - 7050:7050
-    - 8050:8050
     - 21000:21000
     - 21050:21050
     - 25000:25000
-    environment:
-      IMPALA_STATE_STORE: "false"
-      KUDU_MASTER: "false"
-      KUDU_MASTER_HOSTS: "kudu"
+    - 25010:25010
+    - 25020:25020
 networks:
   default:
     external:
-      name: hadoop
-  hadoop:
+      name: parrot
+  parrot:
     driver: bridge
