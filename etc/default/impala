@@ -24,7 +24,7 @@ ENABLE_CORE_DUMPS=false
 # HIVE_HOME=/usr/lib/hive
 # HBASE_HOME=/usr/lib/hbase
 # IMPALA_CONF_DIR=/etc/impala/conf
-# HADOOP_CONF_DIR=/etc/impala/conf
-# HIVE_CONF_DIR=/etc/impala/conf
+HADOOP_CONF_DIR=/etc/hadoop/conf
+HIVE_CONF_DIR=/etc/impala/conf
 # HBASE_CONF_DIR=/etc/impala/conf
 

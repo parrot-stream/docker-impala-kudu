@@ -1,7 +1,7 @@
 <configuration>
 	<property>
 		<name>dfs.client.read.shortcircuit</name>
-		<value>true</value>
+		<value>false</value>
 	</property>
 
 	<property>
@@ -34,7 +34,7 @@
 
 	<property>
 		<name>dfs.client.file-block-storage-locations.timeout.millis</name>
-		<value>10000</value>
+		<value>15000</value>
 	</property>
 	<property>
 		<name>dfs.datanode.hdfs-blocks-metadata.enabled</name>

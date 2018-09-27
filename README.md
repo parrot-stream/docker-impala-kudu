@@ -35,4 +35,5 @@ Once started you'll be able to access to the following UIs:
 
 ### Available tags:
 
-- Impala 2.7.0 ([2.7.0-cdh5.11.1](https://github.com/parrot-stream/docker-impala-kudu/blob/2.7.0-cdh5.11.1/Dockerfile), [latest](https://github.com/parrot-stream/docker-impala-kudu/blob/latest/Dockerfile))
+- Impala 2.7.0 ([2.7.0-cdh5.15.1](https://github.com/parrot-stream/docker-impala-kudu/blob/2.7.0-cdh5.15.1/Dockerfile), [latest](https://github.com/parrot-stream/docker-impala-kudu/blob/latest/Dockerfile))
+- Impala 2.7.0 ([2.7.0-cdh5.11.1](https://github.com/parrot-stream/docker-impala-kudu/blob/2.7.0-cdh5.11.1/Dockerfile))
