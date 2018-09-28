@@ -60,7 +60,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: parrotstream/impala-kudu:latest
+    image: parrotstream/impala-kudu:2.7.0-cdh5.15.1
     links:
     - zookeeper
     networks:
