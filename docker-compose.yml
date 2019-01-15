@@ -1,79 +1,26 @@
-version: '3'
+version: '3.7'
 services:
-  zookeeper:
-    image: parrotstream/zookeeper:latest
-    ports:
-    - 2181:2181
-    - 2888:2888
-    - 3888:3888
-    networks:
-    - parrot
-  hadoop:
-    image: parrotstream/hadoop:2.8.5
-    links:
-    - zookeeper
-    networks:
-    - parrot
-    ports:
-    - 50070:50070
-    - 50075:50075
-    - 8020:8020
-    - 8042:8042
-    - 8088:8088
-    - 8188:8188
-    - 19888:19888
-  kudu-master:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: parrotstream/kudu:1.7.0-cdh5.15.1
-    networks:
-      parrot:
-        aliases:
-        - kudu
-    cap_add:
-    - SYS_TIME
-    links:
-    - hadoop
-    ports:
-    - 7051:7051
-    - 8051:8051
-    environment:
-      KUDU_MASTER: "true"
-  kudu-tserver:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: parrotstream/kudu:1.7.0-cdh5.15.1
-    links:
-    - hadoop
-    networks:
-    - parrot
-    cap_add:
-    - SYS_TIME
-    ports:
-    - 7050:7050
-    - 8050:8050
-    environment:
-      KUDU_MASTER: "false"
   impala:
+    container_name: impala
     build:
       context: .
       dockerfile: Dockerfile
     image: parrotstream/impala-kudu:2.7.0-cdh5.15.1
-    links:
+    external_links:
+    - hadoop
+    - hive
+    - kudu-master
+    - kudu-tserver
     - zookeeper
-    networks:
-    - parrot
     ports:
     - 21000:21000
     - 21050:21050
     - 25000:25000
     - 25010:25010
     - 25020:25020
+    environment:
+      IMPALA_STATE_STORE: "false"
 networks:
-  default:
-    external:
-      name: parrot
   parrot:
+    name: parrot_default
     driver: bridge
