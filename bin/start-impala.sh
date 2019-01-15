@@ -1,5 +1,25 @@
 #!/bin/bash
 
+/wait-for-it.sh kudu-master:7051 -t 120
+/wait-for-it.sh kudu-master:8051 -t 120
+rc=$?
+if [ $rc -ne 0 ]; then
+    echo -e "\n----------------------------------------"
+    echo -e "    Kudu Master not ready! Exiting..."
+    echo -e "----------------------------------------"
+    exit $rc
+fi
+
+/wait-for-it.sh kudu-tserver:7050 -t 120
+/wait-for-it.sh kudu-tserver:8050 -t 120
+rc=$?
+if [ $rc -ne 0 ]; then
+    echo -e "\n----------------------------------------"
+    echo -e "  Kudu Tablet Server not ready! Exiting..."
+    echo -e "----------------------------------------"
+    exit $rc
+fi
+
 #if [[ $IMPALA_STATE_STORE = "true" ]]; then
   supervisorctl start impala-state-store
   supervisorctl start impala-catalog
@@ -21,7 +41,7 @@ supervisorctl start impala-server
 rc=$?
 if [ $rc -ne 0 ]; then
   echo -e "\n----------------------------------------"
-  echo -e "  Impala Server not ready! Exiting..."
+  echo -e "  Impala Kudu Server not ready! Exiting..."
   echo -e "----------------------------------------"
   exit $rc
 fi

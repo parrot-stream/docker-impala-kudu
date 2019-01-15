@@ -18,18 +18,22 @@ if [ $rc -ne 0 ]; then
     exit $rc
 fi
 
-#/start-impala.sh
+/wait-for-it.sh hive:9083 -t 120
+rc=$?
+if [ $rc -ne 0 ]; then
+    echo -e "\n--------------------------------------------"
+    echo -e "      Hive not ready! Exiting..."
+    echo -e "--------------------------------------------"
+    exit $rc
+fi
 
-########################################
-#	IMPALA
-########################################
-#/wait-for-it.sh hive:10002 -t 120
-#rc=$?
-#if [ $rc -ne 0 ]; then
-#    echo -e "\n---------------------------------------"
-#    echo -e "     HIVE not ready! Exiting..."
-#    echo -e "---------------------------------------"
-#    exit $rc
-#fi
+/wait-for-it.sh kudu-master:8051 -t 120
+rc=$?
+if [ $rc -ne 0 ]; then
+    echo -e "\n--------------------------------------------"
+    echo -e "      Kudu not ready! Exiting..."
+    echo -e "--------------------------------------------"
+    exit $rc
+fi
 
 /start-impala.sh
