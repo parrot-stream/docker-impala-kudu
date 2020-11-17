@@ -9,6 +9,7 @@ ADD cloudera-cdh5.repo /etc/yum.repos.d/
 RUN rpm --import http://archive.cloudera.com/beta/impala-kudu/redhat/7/x86_64/impala-kudu/RPM-GPG-KEY-cloudera   
 RUN yum install -y hadoop-libhdfs
 RUN yum install -y impala-kudu impala-kudu-server impala-kudu-shell impala-kudu-catalog impala-kudu-state-store
+RUN yum install -y gcc python-devel cyrus-sasl*
 RUN yum clean all
 
 ADD etc/supervisord.conf /etc/
